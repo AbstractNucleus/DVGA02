@@ -10,7 +10,7 @@ public class ColoredBox extends Sprite {
     @Override
     public void draw(Graphics2D graphics) {
         graphics.setColor(this.color);
-        graphics.drawRect(getX(), getY(), getWidth(), getHeight());
+        graphics.fillRect(getX(), getY(), getWidth(), getHeight());
     }
 
     @Override
