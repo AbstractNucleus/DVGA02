@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Game {
-	private Player player = new Player(400, 590, 60, 10, Color.cyan);
+	private Player player = new Player(400, 590, 100, 10, Color.cyan);
 	private SquareCollection squareCollection = new SquareCollection(20, 6);
 	private Ball ball = new Ball(400, 300, 20, 20);
 	private ArrayList<Sprite> objects = new ArrayList<Sprite>();
@@ -22,8 +22,11 @@ public class Game {
 		this.squareCollection.update(keyboard);
 		this.player.update(keyboard);
 		this.ball.new_update(keyboard, this.objects);
-		this.score = this.original_objects.size() - this.objects.size();
 		if (this.ball.getY() >= 600){
+			for (ColoredBox obj: getColoredBoxes()){
+				score += obj.getPoints();
+			}
+
             System.out.println(this.score);
 			System.exit(0);
         }
@@ -43,5 +46,15 @@ public class Game {
 				this.objects.add(square);
 			}
 		}
+	}
+
+	public ArrayList<ColoredBox> getColoredBoxes(){
+		ArrayList<ColoredBox> boxes = new ArrayList<ColoredBox>();
+		for (ColoredBox square: this.squareCollection.getAllSquares()){
+			if (square.getHits() >= square.getHp()){
+				boxes.add(square);
+			}
+		}
+		return boxes;
 	}
 }

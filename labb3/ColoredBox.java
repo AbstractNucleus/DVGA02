@@ -1,8 +1,11 @@
 import java.awt.*;
 
 public class ColoredBox extends Sprite {
-    public ColoredBox(int x, int y, int width, int height, int hp){
+    private int points;
+
+    public ColoredBox(int x, int y, int width, int height, int hp, int points){
         super(x, y, width, height, hp);
+        this.points = points;
     }
 
     @Override
@@ -32,4 +35,7 @@ public class ColoredBox extends Sprite {
         
     }
 
+    public int getPoints(){
+        return this.points;
+    }
 }
