@@ -1,5 +1,6 @@
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.*;
 
 public class Keyboard {
 	HashMap<Key, Boolean> state;
@@ -35,6 +36,25 @@ public class Keyboard {
 			case KeyEvent.VK_ENTER:  state.put(Key.Enter,  st); break;
 			case KeyEvent.VK_SPACE:  state.put(Key.Space,  st); break;
 		}
+	}
+
+	public ArrayList<Key> getKeysDown(){
+		ArrayList<Key> keysDown = new ArrayList<Key>();
+
+		if (state.get(Key.Up)){
+			keysDown.add(Key.Up);
+		}
+		if (state.get(Key.Down)){
+			keysDown.add(Key.Down);
+		}
+		if (state.get(Key.Left)){
+			keysDown.add(Key.Left);
+		}
+		if (state.get(Key.Right)){
+			keysDown.add(Key.Right);
+		}
+
+		return keysDown;
 	}
 	
 }
