@@ -7,7 +7,7 @@ public class SquareCollection {
     public SquareCollection(int row_size, int rows){
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < row_size; j++){
-                ColoredBox redBox = new ColoredBox(j * 80, i*80, 80, 80, i + 1, rows - i - 1);
+                ColoredBox redBox = new ColoredBox(j * 80, i*80, 80, 80, i + 1, rows - i);
                 this.squares.add(redBox);
             }
         }
