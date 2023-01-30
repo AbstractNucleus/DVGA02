@@ -22,44 +22,41 @@ public abstract class Sprite {
 	public abstract void draw(Graphics2D graphics);
 
 	public boolean isCollidedWith(Sprite target){
-		int target_left_side_coord = target.getX() - target.getWidth()/2;
-		int target_right_side_coord = target.getX() + target.getWidth()/2;
-		int target_top_side_coord = target.getY() - target.getHeight()/2;
-		int target_bottom_side_coord = target.getY() + target.getHeight()/2;
+		int target_left_side_x = target.getX();
+		int target_right_side_x = target.getX() + target.getWidth();
+		int target_bottom_side_y = target.getY() + target.getHeight();
+		int target_top_side_y = target.getY();
 		
-		int self_left_side_coord = this.getX() - this.getWidth()/2;
-		int self_right_side_coord = this.getX() + this.getWidth()/2;
-		int self_top_side_coord = this.getY() - this.getHeight()/2;
-		int self_bottom_side_coord = this.getY() + this.getHeight()/2;
+		int self_left_side_x = this.getX();
+		int self_right_side_x = this.getX() + this.getWidth();
+		int self_top_side_y = this.getY();
+		int self_bottom_side_y = this.getY() + this.getHeight();
 
-		if (self_left_side_coord < target_right_side_coord && self_right_side_coord > target_left_side_coord && self_top_side_coord < target_bottom_side_coord && self_bottom_side_coord > target_top_side_coord){
-			return true;
-		}
+		if (self_left_side_x <= target_right_side_x && self_right_side_x >= target_left_side_x && self_top_side_y <= target_bottom_side_y && self_bottom_side_y >= target_top_side_y){return true;}
         return false;
     }
 
     public Side getCollSide(Sprite target){
-        int target_left_side_coord = target.getX() - target.getWidth()/2;
-		int target_right_side_coord = target.getX() + target.getWidth()/2;
-		int target_bottom_side_coord = target.getY() + target.getHeight()/2;
+        int target_left_side_x = target.getX();
+		int target_right_side_x = target.getX() + target.getWidth();
+		int target_bottom_side_y = target.getY() + target.getHeight();
+		int target_top_side_y = target.getY();
 		
-		int self_left_side_coord = this.getX() - this.getWidth()/2;
-		int self_right_side_coord = this.getX() + this.getWidth()/2;
-		int self_top_side_coord = this.getY() - this.getHeight()/2;
+		int self_left_side_x = this.getX();
+		int self_right_side_x = this.getX() + this.getWidth();
+		int self_top_side_y = this.getY();
+		int self_bottom_side_y = this.getY() + this.getHeight();
 
-		if (self_left_side_coord < target_right_side_coord && self_right_side_coord > target_left_side_coord){
-			if (self_top_side_coord < target_bottom_side_coord){
-				return Side.Top;
-			} else {
-				return Side.Bottom;
-			}
-		} else {
-			if (self_left_side_coord < target_right_side_coord){
-				return Side.Left;
-			} else {
-				return Side.Right;
-			}
-		}
+		boolean self_is_right_of_target = self_left_side_x >= target_right_side_x;
+		boolean self_is_left_of_target = self_right_side_x <= target_left_side_x;
+		boolean self_is_below_of_target = self_top_side_y >= target_bottom_side_y;
+		boolean self_is_above_of_target = self_bottom_side_y <= target_top_side_y;
+
+		if (self_is_right_of_target && !self_is_above_of_target && !self_is_below_of_target && !self_is_left_of_target){return Side.Right;}
+		else if (self_is_left_of_target && !self_is_above_of_target && !self_is_below_of_target && !self_is_right_of_target){return Side.Left;}
+		else if (self_is_below_of_target && !self_is_above_of_target && !self_is_left_of_target && !self_is_right_of_target){return Side.Bottom;}
+		else {return Side.Top;}
+		
     }
 
 	public void addHits(int i){

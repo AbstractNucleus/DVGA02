@@ -64,7 +64,7 @@ public class Game {
 		this.objects.clear();
 		this.objects.add(this.player);
 		for (ColoredBox square: this.squareCollection.getAllSquares()){
-			if (square.getHits() < square.getHp()){
+			if (square.getVisible() == 1){
 				this.objects.add(square);
 			}
 		}

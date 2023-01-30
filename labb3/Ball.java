@@ -53,24 +53,23 @@ public class Ball extends Sprite {
             if (isCollidedWith(object)){
                 Side side = getCollSide(object);
                 switch (side){
-                    case Top: this.y_speed *= -1; break;
-                    case Bottom: this.y_speed *= -1; break;
-                    case Left: this.x_speed *= -1; break;
-                    case Right: this.x_speed *= -1; break;
+                    case Top: this.y_speed = -Math.abs(this.y_speed); break;
+                    case Bottom: this.y_speed = Math.abs(this.y_speed); break;
+                    case Left: this.x_speed = -Math.abs(this.x_speed); break;
+                    case Right: this.x_speed = Math.abs(this.x_speed); break;
                 }
                 object.addHits(1);
             }
         }
 
-        if ((getX() + getWidth()/2) >= (800)){
-            this.x_speed *= -1;
+        if ((getX() + getWidth()) > (800)){
+            this.x_speed = -Math.abs(this.x_speed);
         }
-        else if ((getX() - getWidth()/2) <= (0 - getWidth()/2)){
-            this.x_speed *= -1;
+        else if (getX() < 0){
+            this.x_speed = Math.abs(this.x_speed);
         }
-        else if ((getY() - getHeight()/2) <= (0 - getHeight()/2)){
-            this.y_speed *= -1;
+        else if (getY() < 0){
+            this.y_speed = Math.abs(this.y_speed);
         }
-        
     }
 }
