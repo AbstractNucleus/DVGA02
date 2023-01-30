@@ -29,8 +29,8 @@ public class Game {
 	}
 
 	public void update(Keyboard keyboard) {
-		if (life-1 == lives){System.out.println("Game over with " + calcPoints()); System.exit(0);}
-		if (getBoxesLeft() == 0){System.out.println("Game completed with " + calcPoints()); System.exit(0);}
+		if (life-1 == lives){System.out.println("\n\nGame over with " + calcPoints() + " points\n"); System.exit(0);}
+		if (getBoxesLeft() == 0){System.out.println("\n\nGame completed with " + calcPoints() + " points\n"); System.exit(0);}
 
 		this.life_view.setLife(life);
 		this.life_left_view.setLife(lives-life);
