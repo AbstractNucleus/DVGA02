@@ -3,17 +3,16 @@ import java.util.ArrayList;
 
 public class Game {
 	private Player player = new Player(400, 590, 100, 10, Color.cyan);
+	//private Player player = new Player(0, 590, 800, 10, Color.cyan);
 	private SquareCollection squareCollection = new SquareCollection(10, 3);
 	private ArrayList<Ball> balls = new ArrayList<Ball>();
 	private ArrayList<Sprite> objects = new ArrayList<Sprite>();
-	private Lives score_view = new Lives(700, 320, Color.blue);
+	private Lives score_view = new Lives(700, 320, Color.blue, "Score: ");
 	ArrayList<Sprite> original_objects = new ArrayList<Sprite>(objects);
 	private int life = 1;
 	private int lives = 3;
-	private Lives life_view = new Lives(100, 320, Color.green);
-	private Lives life_left_view = new Lives(120, 320, Color.red);
-
-
+	private Lives life_view = new Lives(100, 320, Color.green, "Life: ");
+	private Lives life_left_view = new Lives(100, 350, Color.red, "Lives left: ");
 
 	public Game(GameBoard board) {
 		for (int i = 0; i < 4; i++){
@@ -29,8 +28,7 @@ public class Game {
 	}
 
 	public void update(Keyboard keyboard) {
-		if (life-1 == lives){System.out.println("\n\nGame over with " + calcPoints() + " points\n"); System.exit(0);}
-		if (getBoxesLeft() == 0){System.out.println("\n\nGame completed with " + calcPoints() + " points\n"); System.exit(0);}
+		
 
 		this.life_view.setLife(life);
 		this.life_left_view.setLife(lives-life);
@@ -52,6 +50,8 @@ public class Game {
 	}
 
 	public void draw(Graphics2D graphics) {
+		if (life-1 == lives){graphics.setFont(new Font("Comic Sans MS", Font.PLAIN, 38)); graphics.setColor(Color.red); graphics.drawString("Game over with " + calcPoints() + " points", 200, 300);}
+		if (getBoxesLeft() == 0){graphics.setFont(new Font("Comic Sans MS", Font.PLAIN, 38)); graphics.setColor(Color.green); graphics.drawString("Game completed with " + calcPoints() + " points", 200, 300);}
 		this.life_view.draw(graphics);
 		this.life_left_view.draw(graphics);
 		this.score_view.draw(graphics);

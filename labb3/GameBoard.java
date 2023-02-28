@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.JComponent;
 
 public class GameBoard extends JComponent {
-	private final int FPS = 40; 
+	private final int FPS = 90; 
 	private Game game;
 	private Keyboard keyboard;
 	public GameBoard() {
@@ -18,9 +18,10 @@ public class GameBoard extends JComponent {
 
 	@Override
 	protected void paintComponent(Graphics arg0) {
+		Color bg = new Color(25, 25, 25);
 		super.paintComponent(arg0);
 		Graphics2D graphics = (Graphics2D)arg0;
-		graphics.setColor(Color.black);
+		graphics.setColor(bg);
 		graphics.fillRect(0, 0, getWidth(), getHeight());
 		
 		game.draw(graphics);

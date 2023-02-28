@@ -2,6 +2,7 @@ import java.awt.Graphics2D;
 
 public abstract class Sprite {
 	private int x, y, width, height, hp;
+    private int dead_alive = 1;
 	private int hits = 0;
 	public int getX() { return this.x; }
 	public int getY() { return this.y; }
@@ -77,5 +78,13 @@ public abstract class Sprite {
 
 	public int getHp(){
 		return this.hp;
+	}
+
+	public void setDeadAlive(int i){
+		this.dead_alive = i;
+	}
+
+	public int getDeadAlive(){
+		return this.dead_alive;
 	}
 }

@@ -6,6 +6,7 @@ public class Ball extends Sprite {
     private int x_speed = 0;
     private int y_speed = 0;
     private int visible = 0;
+    private int previously_hit = 0;
 
     public Ball(int x, int y, int width, int height){
         super(x, y, width, height, 1);
@@ -38,8 +39,8 @@ public class Ball extends Sprite {
 
         if (keyboard.isKeyDown(Key.Space) && !started_moving){
             started_moving = true;
-            this.x_speed = 4;
-            this.y_speed = 6;
+            this.x_speed = 2;
+            this.y_speed = 4;
         }
 
         checkCollission(objects);
@@ -50,7 +51,8 @@ public class Ball extends Sprite {
 
     public void checkCollission(ArrayList<Sprite> objects){
         for (Sprite object: objects){
-            if (isCollidedWith(object)){
+        
+            if (isCollidedWith(object) && object.getDeadAlive() == 1){
                 Side side = getCollSide(object);
                 switch (side){
                     case Top: this.y_speed = -Math.abs(this.y_speed); break;
@@ -59,7 +61,11 @@ public class Ball extends Sprite {
                     case Right: this.x_speed = Math.abs(this.x_speed); break;
                 }
                 object.addHits(1);
+                object.setDeadAlive(0);
+                this.previously_hit += 1;
+                break;
             }
+            object.setDeadAlive(1);
         }
 
         if ((getX() + getWidth()) > (800)){
