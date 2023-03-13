@@ -1,0 +1,10 @@
+asd: 50
+SDG: 30
+SDF: 30
+SEP: 30
+sfd: 29
+POG: 28
+JGL: 27
+GHJ: 26
+POG: 25
+POG: 24
